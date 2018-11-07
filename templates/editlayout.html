@@ -1,0 +1,166 @@
+{% extends "layout.html" %}
+
+{% block title %}Editor{% endblock %}
+{%set var ='<div class="navbar-end">
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          User
+        </a>
+        <div class="navbar-dropdown">
+          <a  href="/login">
+            Profile
+          </a>
+          <a  href="/logout">
+            Logout
+            </a>
+        </div>
+        </div>
+    </div>' %}
+{%block navbar%}{{var|safe}}{%endblock%}
+{% block content %}
+
+	<div class="row">
+			  <div class="column left" ">
+				<br>
+				<br>
+				<br>
+				<img src={{url_for('static', filename='avatars/'+variable[3])}} alt="avatar"  class = "avatar2">
+				
+				
+				<h1><b>{{variable[1]}}</b></h1>
+				<hr>
+				<h3>Total Points: {{variable[5]}}</h3><br>
+				{%if variable[6]%}
+        				<h3>Clan: {{variable[6]}}</h3><br>
+        			{%else%}
+            			<h3>Clan: None</h3><br>
+        			{%endif%}	
+				<h3>Date of Join: {{variable[7]}}</h3><br>
+        			{%if variable[9]%}
+        			    <p>Current Status: Active</p>
+			    {%else%}
+        			    <p>Current Status: Not Active</p>
+			    {%endif%}
+			  </div>
+        
+
+	 <div class="column right" style="background-color:#f2f2f2;">
+		 <button class="accordion">Change Username</button>
+        <div class="panel">
+          <form action={{url_for('editProfile',var=variable[0])}} method="POST"enctype="multipart/form-data">
+				
+				{{formU.csrf_token}}
+			
+				{{formU.username.label}}
+				<br>
+				{{formU.username}}
+				{%for error in formU.username.errors%}
+        				<br>
+        				<p style= "color:red;">{{error}}</p>
+                	{% endfor %}	
+                	{%if errorU %}
+                    	<br>
+                    	<p style= "color:red;">{{errorU}}</p>
+                	{%endif%}
+                	<br>
+                	<input type="submit" value="Save" >
+                	
+        </form>
+        </div>
+	 </div>
+	 
+	 <div class="column right" style="background-color:#f2f2f2;">
+		 <button class="accordion">Change Password</button>
+        <div class="panel">
+          <form action={{url_for('editProfile',var=variable[0])}} method="POST"enctype="multipart/form-data">
+				
+				{{formP.csrf_token}}
+			
+				
+				{{formP.password3.label}}
+				<br>	
+				{{formP.password3}}
+				
+				<br>
+				
+				{{formP.password1.label}}
+				<br>	
+				{{formP.password1}}
+				
+				<br>
+				{{formP.password2.label}}
+				<br>	
+				{{formP.password2}}	
+
+				{%for error in formP.password1.errors%}
+        				<br>
+        				<p style= "color:red;">{{error}}</p>
+                	{% endfor %}
+                	{%if errorP %}
+                    	<br>
+                    	<p style= "color:red;">{{errorP}}</p>
+                	{%endif%}
+                	<br>
+                	<input type="submit" value="Save" >
+        </form>
+        </div>
+
+	 </div>
+	 
+	 <div class="column right" style="background-color:#f2f2f2;">
+		<button class="accordion">Change Email</button>
+        <div class="panel">
+         <form action={{url_for('editProfile',var=variable[0])}} method="POST"enctype="multipart/form-data">
+                  {{formE.csrf_token}}
+                  {{formE.email1.label}}
+				<br>
+				{{formE.email1}}
+				<br>
+				{%for error in formE.email1.errors%}
+        				<p style= "color:red;">{{error}}</p>
+                	{% endfor %}
+                	{%if errorE%}
+                    	<br>
+                    	<p style= "color:red;">{{errorE}}</p>
+                	{%endif%}
+                	<br>
+                	<input type="submit" value="Save" >
+                	</form>
+        </div>
+
+	 </div>
+	 
+	 <div class="column right" style="background-color:#f2f2f2;">
+		 <button class="accordion">Change Avatar </button>
+        <div class="panel">
+         <form action={{url_for('editProfile',var=variable[0])}} method="POST"enctype="multipart/form-data">
+                  {{formA.csrf_token}}
+                  {{formA.upload.label}}
+				{{formA.upload}}
+				{%for error in formA.upload.errors%}
+        				<br>
+        				<p style= "color:red;">{{error}}</p>
+                	{% endfor %}	
+                	<br>
+                	<input type="submit" value="Save" >
+                	</form>
+        </div>
+
+	 </div>
+	 <script>
+        var acc = document.getElementsByClassName("accordion");
+        var i;
+        
+        for (i = 0; i < acc.length; i++) {
+          acc[i].addEventListener("click", function() {
+            this.classList.toggle("active");
+            var panel = this.nextElementSibling;
+            if (panel.style.maxHeight){
+              panel.style.maxHeight = null;
+            } else {
+              panel.style.maxHeight = panel.scrollHeight + "px";
+            } 
+          });
+        }
+        </script>
+{%endblock%}

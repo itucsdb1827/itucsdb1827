@@ -1,0 +1,58 @@
+{% extends "layout.html" %}
+{%set var ='<div class="navbar-end">
+      <div class="navbar-item">
+        <div class="field is-grouped">
+          <p class="control">
+            <a class="bd-tw-button button" href="/login">
+              <span class="icon">
+                <i class="fab fa-twitter"></i>
+              </span>
+              <span>
+                Log In
+              </span>
+            </a>
+          </p>
+          <p class="control">
+            <a class="button is-primary" href=/signup>
+              <span class="icon">
+                <i class="fas fa-download"></i>
+              </span>
+              <span>Sign Up</span>
+            </a>
+          </p>
+        </div>
+      </div>
+    </div>'%}
+{% block title %}Home{% endblock %}
+{%block navbar%}{{var|safe}}{%endblock%}
+{% block content %}
+
+<link rel="stylesheet"
+          href="static/asd.css"/>
+<div class="w3-card-4 w3-margin w3-white">
+            <div style="width=%60">
+				<div class ="form">
+				<form action="{{url_for('login')}}" method="POST"enctype="multipart/form-data">
+				
+				{{form.csrf_token}}
+				
+				<br>
+				{{form.username.label}}
+				<br>
+				{{form.username}}
+
+				<br>
+				{{form.password.label}}
+				<br>
+				{{form.password}}	
+				<br>
+				<p>{{error}}</p>
+				<br>
+        			<input type="submit" value="Log In" >
+					</form> 
+					</div>
+				</div>
+
+  </div>
+    
+{% endblock %}

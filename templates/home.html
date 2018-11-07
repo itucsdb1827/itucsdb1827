@@ -1,0 +1,98 @@
+{% extends "layout.html" %}
+{%set var ='<div class="navbar-end">
+      <div class="navbar-item">
+        <div class="field is-grouped">
+          <p class="control">
+            <a class="bd-tw-button button" href="/login">
+              <span class="icon">
+                <i class="fab fa-twitter"></i>
+              </span>
+              <span>
+                Log In
+              </span>
+            </a>
+          </p>
+          <p class="control">
+            <a class="button is-primary" href=/signup>
+              <span class="icon">
+                <i class="fas fa-download"></i>
+              </span>
+              <span>Sign Up</span>
+            </a>
+          </p>
+        </div>
+      </div>
+    </div>'%}
+{% block title %}Home{% endblock %}
+{%block navbar%}{{var|safe}}{%endblock%}
+{% block content %}
+    
+<link rel="stylesheet"
+          href="static/asd.css"/>
+<div class="w3-card-4 w3-margin w3-white">
+            <div style="width=%60">
+				<div class ="form">
+				<form action="{{url_for('signup')}}" method="POST"enctype="multipart/form-data">
+				
+				{{form.csrf_token}}
+			
+				{{form.username.label}}
+				<br>
+				{{form.username}}
+				{%for error in form.username.errors%}
+        				<br>
+        				<p style= "color:red;">{{error}}</p>
+                	{% endfor %}	
+                	{%if errorU %}
+                    	<br>
+                    	<p style= "color:red;">{{errorU}}</p>
+                  
+                	{%endif%}
+				<br>
+				{{form.email1.label}}
+				<br>
+				{{form.email1}}
+				<br>
+				{%for error in form.email1.errors%}
+        				<p style= "color:red;">{{error}}</p>
+                	{% endfor %}
+                	{%if errorE%}
+                    	<br>
+                    	<p style= "color:red;">{{errorE}}</p>
+                	{%endif%}
+				<br>
+				{{form.password1.label}}
+				<br>	
+				{{form.password1}}	
+
+				{%for error in form.password1.errors%}
+        				<br>
+        				<p style= "color:red;">{{error}}</p>
+                	{% endfor %}	
+				<br>
+				{{form.password2.label}}
+				<br>
+				{{form.password2}}
+				<br>
+				{{form.upload.label}}
+				{{form.upload}}
+				{%for error in form.upload.errors%}
+        				<br>
+        				<p style= "color:red;">{{error}}</p>
+                	{% endfor %}	
+				<br>
+				{{form.checkbox}}
+				<a href={{url_for('terms')}} target="_blank" rel="noopener noreferrer" >I read terms and conditions.</a>
+				<br>
+				{{form.recaptcha}}
+				<br>
+				<br>
+				
+        			<input type="submit" value="Sign Up" >
+					</form> 
+					</div>
+				</div>
+
+  </div>
+    
+{% endblock %}
