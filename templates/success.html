@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+{%set var ='<div class="navbar-end">
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          User
+        </a>
+        <div class="navbar-dropdown">
+          <a  href="/login">
+            Profile
+          </a>
+          <a  href="/logout">
+            Logout
+            </a>
+        </div>
+        </div>
+    </div>' %}
+{%block navbar%}{{var|safe}}{%endblock%}
+{% block title %}Admin Assigned{% endblock %}
+{% block content %}
+        
+        
+{{func(vari,user_id)}}
+<h1>USER ASSIGNED AS ADMIN SUCCESSFULLY</h1>
+
+{% endblock %}

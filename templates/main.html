@@ -1,0 +1,93 @@
+{% extends "layout.html" %}
+{% if key == 'yes'%}
+{%set var ='<div class="navbar-end">
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          User
+        </a>
+        <div class="navbar-dropdown">
+          <a  href="/login">
+            Profile
+          </a>
+          <a  href="/logout">
+            Logout
+            </a>
+        </div>
+        </div>
+    </div>' %}
+{% else %}
+{%set var ='<div class="navbar-end">
+      <div class="navbar-item">
+        <div class="field is-grouped">
+          <p class="control">
+            <a class="bd-tw-button button" href="/login">
+              <span class="icon">
+                <i class="fab fa-twitter"></i>
+              </span>
+              <span>
+                Log In
+              </span>
+            </a>
+          </p>
+          <p class="control">
+            <a class="button is-primary" href=/signup>
+              <span class="icon">
+                <i class="fas fa-download"></i>
+              </span>
+              <span>Sign Up</span>
+            </a>
+          </p>
+        </div>
+      </div>
+    </div>'%}
+{% endif %}
+{%block navbar%}{{var|safe}}{%endblock%}
+{% block title %}Home{% endblock %}
+{% block content %}
+
+
+<div class="grid-container">
+  <div class="grid-item">
+	  <h3>Latest 10 problem</h3>
+	  {%for i in line%}
+		<a href={{url_for('problems',var=i[1],reply=0)}}>{{i[3]}}</a>
+		<br>
+	  {% endfor %}
+	  {% if line %}
+	  {% else %}
+        	  <h4>No Problem Found</h4>
+	  {% endif %}
+
+  </div>
+  <div class="grid-item">
+	<h3>  Best 10 User  </h3>
+	  {%for i in line2%}
+		<a href={{url_for('user',var=i[0])}}>{{i[1]}}</a>
+		<br>
+	  {% endfor %}
+	  {% if line2 %}
+	  {% else %}
+        	  <h4>No User Found</h4>
+	  {% endif %}
+  </div>
+  <div class="grid-item">
+	<h3>  Best 10 Clan  </h3>
+	  {%for i in line3%}
+		<a href={{url_for('clans',clan_id=i[0])}}>{{i[3]}}</a>
+		<br>
+	  {% endfor %}
+	  
+	  {% if line3 %}
+	  {% else %}
+        	  <h4>No Clan Found</h4>
+	  {% endif %}
+  </div> 
+</div>
+<div style="align:center;">
+       <a href={{url_for('seeAll',typ='algo')}}><button value="Return" class="button">See All Algorithm Problems</button></a>
+	  <a href={{url_for('seeAll',typ='ds')}}><button value="Return" class="button">See All Data Structures Problems</button></a>
+	  <a href={{url_for('seeAll',typ='m')}}><button value="Return" class="button">See All Math Problems</button></a>
+	  <a href={{url_for('seeAll',typ='phy')}}><button value="Return" class="button">See All Physics Problems</button></a>
+</div>
+
+{%endblock%}   

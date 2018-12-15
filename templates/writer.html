@@ -1,0 +1,73 @@
+{% extends "layout.html" %}
+{%set var ='<div class="navbar-end">
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          User
+        </a>
+        <div class="navbar-dropdown">
+          <a  href="/login">
+            Profile
+          </a>
+          <a  href="/logout">
+            Logout
+            </a>
+        </div>
+        </div>
+    </div>' %}
+{%block navbar%}{{var|safe}}{%endblock%}
+{% block title %}Writer{% endblock %}
+{% block content %}
+		
+      <h3><b>SHARE YOUR QUESTION!</b> </h3>
+      <br>
+            		<a href="/"><button value="Return" class="button">Return Home Page</button></a>
+				
+				{% if clan_id %}
+        				<form action={{url_for('clanWriter',clan_id=clan_id)}} method="POST"enctype="multipart/form-data">
+				{% else%}
+				<form action={{url_for('writer')}} method="POST"enctype="multipart/form-data">
+				{% endif %}
+				{{form.csrf_token}}
+			
+				{{form.title.label}}
+				<br>
+				{{form.title}}
+				
+				<br>
+				{{form.topic.label}}
+				<br>
+				{{form.topic}}
+				
+				<br>
+				{{form.time.label}}
+				<br>	
+				{{form.time}}	
+
+				
+				<br>
+				{{form.question.label}}
+				<br>
+				{{form.question}}
+				<br>
+				{{form.answer.label}}
+				<br>
+				{{form.answer}}
+				
+				
+				<br>
+				<br>
+				
+        			<input type="submit" value="Publish" >
+					</form> 
+					
+				
+{%endblock%}    
+
+  
+	 
+      
+
+  
+
+
+

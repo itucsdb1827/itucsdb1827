@@ -1,0 +1,53 @@
+{% extends "layout.html" %}
+{%set var ='<div class="navbar-end">
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          User
+        </a>
+        <div class="navbar-dropdown">
+          <a  href="/login">
+            Profile
+          </a>
+          <a  href="/logout">
+            Logout
+            </a>
+        </div>
+        </div>
+    </div>' %}
+{%block navbar%}{{var|safe}}{%endblock%}
+{% block title %}Edit Message{% endblock %}
+{% block content %}
+<h3><b>EDIT YOUR MESSAGE!</b> </h3>
+<br>
+
+{% if pack[6]|string() == 'general' %}
+<a href={{url_for('problems',var=pack[5],reply=0)}}><button value="Return" class="button">Return Problem</button></a>
+{% elif pack[6]|string()=='clan' %}
+<a href={{url_for('clanDiscuss',clan_id=pack[7],topic_id=pack[5],reply=0)}}><button value="Return" class="button">Return Topic</button></a>
+{% else %}
+{{pack[6]|string()}}
+{% endif %}
+
+
+<form action={{url_for('editMessage',problem_id=pack[5],message_id=pack[1])}} method="POST"enctype="multipart/form-data">
+				
+				{{form.csrf_token}}
+			
+				{{form.message.label}}
+				<br>
+				{% set f = form.message.process_data(pack[3]|string()) %}
+				{{form.message}}
+				
+				<br>
+
+
+
+<input type="submit" value="Publish" >
+					</form> 
+
+
+
+
+
+
+{%endblock%}   

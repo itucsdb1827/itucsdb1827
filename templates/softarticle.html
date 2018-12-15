@@ -1,0 +1,112 @@
+{% extends "layout.html" %}
+{% if key == 'yes'%}
+{%set var ='<div class="navbar-end">
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          User
+        </a>
+        <div class="navbar-dropdown">
+          <a  href="/login">
+            Profile
+          </a>
+          <a  href="/logout">
+            Logout
+            </a>
+        </div>
+        </div>
+    </div>' %}
+{% else %}
+{%set var ='<div class="navbar-end">
+      <div class="navbar-item">
+        <div class="field is-grouped">
+          <p class="control">
+            <a class="bd-tw-button button" href="/login">
+              <span class="icon">
+                <i class="fab fa-twitter"></i>
+              </span>
+              <span>
+                Log In
+              </span>
+            </a>
+          </p>
+          <p class="control">
+            <a class="button is-primary" href=/signup>
+              <span class="icon">
+                <i class="fas fa-download"></i>
+              </span>
+              <span>Sign Up</span>
+            </a>
+          </p>
+        </div>
+      </div>
+    </div>'%}
+{% endif %}
+{%block navbar%}{{var|safe}}{%endblock%}
+{% block title %}Soft Article{% endblock %}
+{% block content %}
+        
+
+   
+            <div style="width=%60">
+   
+    <div class="w3-container">
+        <br>
+        <br>
+        <br>
+		
+      <h3><b>{{variable[3]}}</b><br><p>Send Date: {{variable[2]}}</p></h3><br><p>Given Time: {{variable[9]}}</p>
+      
+   
+      
+      <h5><span class="w3-opacity">{{variable[2]}}</span></h5>
+      
+    </div>
+
+    <div class="w3-container">
+        <div style="width:%100;">
+      <p align ="justify">{{variable[4]}}</p>
+      </div>
+    </div>
+  </div>
+
+
+
+  
+      <div class="comment">
+      {%if messages %}
+        <h2>Comments</h2>
+        <br>
+        {% endif %}
+        {% for i in messages %}
+            <p>
+        	   <hr>
+            <img src={{url_for('static', filename='avatars/'+func(i[0]))}} alt="avatar"  class = "avatar"style="float:left;width:42px;height:42px;">
+            <b>{{funcid(i[0])}}</b>
+            <br>
+            <i>{{i[2]}}</i>
+            <br>
+            
+            
+            </p>
+            {{i[3] | safe}}
+            {% if path(i[1]) !=None %}
+                <br>
+                <img src={{url_for('static', filename='avatars/'+path(i[1]))}} alt="image" style="float:left;width:8%;height:6%;">
+                <br>
+                <br>
+                <br>
+              
+            {% endif %}
+            <p id="demo"></p>
+        {% endfor %}
+        
+  
+      </div>
+      
+
+  
+
+{%endblock%}    
+
+  
+       

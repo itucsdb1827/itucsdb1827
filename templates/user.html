@@ -28,16 +28,44 @@
 				<br>
         				<img src={{url_for('static', filename='edit.svg')}} alt="edit"  width="10%" height="10%">
         				<p><a href={{url_for('editProfile',var=variable[0])}}>Edit Profile</a></p>
+        				
+                        <a href={{url_for('deleteProfile',var=variable[1])}} class="button is-link">Delete User</a>
+                        <a href={{url_for('createClan')}} class="button is-link">Create Clan</a>
+                        <a href={{url_for('writer')}} class="button is-link">Create Question</a>
+                      
+        				
 				{%endif%}
+				<br>
+				{{variable[12]}}
+				<br>
+				{% if variable[12]|string() == 'general'%}
+				<br>
+        				 <a href={{url_for('makeadmin',vari='general',user_id=variable[0])}} class="button is-link">Make User General Admin</a>
+        				 <a href={{url_for('makeadmin',vari='ds',user_id=variable[0])}} class="button is-link">Make User Ds Admin</a>
+        				 <br>
+        				 <a href={{url_for('makeadmin',vari='algo',user_id=variable[0])}} class="button is-link">Make User Algo Admin</a>
+        				 <a href={{url_for('makeadmin',vari='m',user_id=variable[0])}} class="button is-link">Make User Math Admin</a>
+        				 <br>
+        				 <a href={{url_for('makeadmin',vari='phy',user_id=variable[0])}} class="button is-link">Make User Pyhsics Admin</a>
 				
+				{% elif variable[12]|string() == 'algo' %}
+        				<a href={{url_for('makeadmin',vari='ds',user_id=variable[0])}} class="button is-link">Make User Algo Admin</a>
+				{% elif variable[12]|string() == 'ds' %}
+        				<a href={{url_for('makeadmin',vari='ds',user_id=variable[0])}} class="button is-link">Make User Ds Admin</a>
+				{% elif variable[12]|string() == 'm' %}
+        				<a href={{url_for('makeadmin',vari='ds',user_id=variable[0])}} class="button is-link">Make User Math Admin</a>
+				{% elif variable[12]|string() == 'phy' %}
+        				<a href={{url_for('makeadmin',vari='phy',user_id=variable[0])}} class="button is-link">Make User Pyhsics Admin</a>
+        				{% endif %}
 				<h1><b>{{variable[1]}}</b></h1>
 				<hr>
 				<h3>Total Points: {{variable[5]}}</h3><br>
 				{%if variable[6]%}
-        				<h3>Clan: {{variable[6]}}</h3><br>
+        				<h3><a href={{url_for('clans',clan_id=variable[6])}}>Clan:{{func(variable[6])}} </a></h3><br>
         			{%else%}
             			<h3>Clan: None</h3><br>
         			{%endif%}	
+        			<h3>E-mail Adress: {{variable[4]}}</h3><br>
 				<h3>Date of Join: {{variable[7]}}</h3><br>
         			{%if variable[9]%}
         			    <p>Current Status: Active</p>
@@ -45,26 +73,85 @@
         			    <p>Current Status: Not Active</p>
 			    {%endif%}
 			  </div>
+			  {% if clanerr %}
+        			  <p>{{clanerr}}</p>
+			  {% endif %}
+			 
+			  {% for i in la%}
+        			  {% if i[10]|string()=="general" %}
+            			  <div class="column right" style="background-color:#f2f2f2;">
+            			  <h2>{{variable[1]}} Created a Problem</h2>
+            			  <a href={{url_for('problems',var=i[1],reply=0)}}>{{i[3]}}</a>
+            			  </div>
+        			  {% elif i[10]|string()=="clan" %}
+            			  <div class="column right" style="background-color:#f2f2f2;">
+            			  <h2>{{variable[1]}} Created a Disqussion</h2>
+            			  <a href={{url_for('clanDiscuss',clan_id=variable[6],topic_id=i[1],reply=0)}}>{{i[3]}}</a>
+            			  </div>
+        			  {% elif i[6]|string()=="clan" %}
+            			  <div class="column right" style="background-color:#f2f2f2;">
+            			  <h2>{{variable[1]}} Wrote a Clan Message</h2>
+            			  <a href={{url_for('clanDiscuss',clan_id=variable[6],topic_id=i[5],reply=0)}}>Go to Disquss</a>
+            			  </div>
+        			  {% elif i[6]|string()=="general" %}
+            			  <div class="column right" style="background-color:#f2f2f2;">
+            			  <h2>{{variable[1]}} Wrote a Message</h2>
+            			  <a href={{url_for('problems',var=i[5],reply=0)}}>Go to Problem</a>
+            			  </div>
+        			 {% else %}
+        			 
+        			 {% endif %}
+        			 
+			  {% endfor %}
+			  {% if la %}
+        			  
+			  {%else%}
+        			  <div class="column right" style="background-color:#f2f2f2;">
+            			  <h2>No Activities.</h2>
+            			  
+            			  </div>
+			  {%endif%}
+			  {% if req %}
 			  <div class="column right" style="background-color:#f2f2f2;">
-				<h2>There Is No Activity.</h2>
-				<p>Soon last 5 activities will be listed.</p>
+        			  <h2>Clan Join Requets</h2>
+        			  {% for i in req %}
+            			  <p href={{url_for('user',var=i[1])}}>{{funcx(i[1])}}</p>
+            			  <a href={{url_for('accept',user=i[1],clan=i[2])}} class="button is-link">Accept</a>
+            			  <a href={{url_for('deny',user=i[1])}} class="button is-link">Deny</a>
+        			  {% endfor %}
 			  </div>
 			  <div class="column right" style="background-color:#f2f2f2;">
-				<h2>There Is No Activity.</h2>
-				<p>Soon last 5 activities will be listed.</p>
-			  </div>
-			  <div class="column right" style="background-color:#f2f2f2;">
-				<h2>There Is No Activity.</h2>
-				<p>Soon last 5 activities will be listed.</p>
-			  </div>
-			  <div class="column right" style="background-color:#f2f2f2;">
-				<h2>There Is No Activity.</h2>
-				<p>Soon last 5 activities will be listed.</p>
-			  </div>
-			  <div class="column right" style="background-color:#f2f2f2;">
-				<h2>There Is No Activity.</h2>
-				<p>Soon last 5 activities will be listed.</p>
+        			  {% for i in message %}
+            			  <p href={{url_for('problems',var=i[5],reply=0)}}>{{funcx(i[0])}}</p>
+            			  <a href={{url_for('deleteMessage',pid=i[5],mid=i[1])}} class="button is-link">Delete Message</a>
+            			 
+        			  {% endfor %}
 			  </div>
 			  
+			  {% endif %}
+			  <div class="column right" style="background-color:#f2f2f2;">
+			  {% if messsage%}
+        			  <h2>REPORTED MESSAGES</h2>
+			  {% endif%}
+			  
+        			  {% for i in message %}
+            			  <a href={{url_for('problems',var=i[5],reply=0)}}><p>{{funcx(i[0])}}</p></a>
+            			  <a href={{url_for('deleteMessage',pid=i[5],mid=i[1])}} class="button is-link">Delete Message</a>
+            			 
+        			  {% endfor %}
+        			  
+        			  {% if messsage2 %}
+            			  <h2>REPORTED CLAN MESSAGES</h2>
+        			  {% endif%}
+			  
+        			  {% for i in message2 %}
+            			  <a href={{url_for('clanDiscuss',clan_id=i[7],topic_id=i[5],reply=0)}}><p>{{funcx(i[0])}}</p></a>
+            			  <a href={{url_for('deleteMessage',pid=i[5],mid=i[1])}} class="button is-link">Delete Message</a>
+            			 
+        			  {% endfor %}
+			  </div>
 			</div>
+<script>
+
+</script>
 {%endblock%}

@@ -1,0 +1,6 @@
+#####################################################################################
+#SQL TABLE'ları 'mydb.sql' dump dosyasının heroku'ya upload edilmesiyle yüklenmiştir#
+#'mydb.sql' dosyası projeye eklenmiştir.					    #
+#örnek komut:								            #				
+#heroku pg:psql --app itucsdb1827 < mydb.sql				            #
+#####################################################################################

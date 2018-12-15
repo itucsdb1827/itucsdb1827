@@ -1,0 +1,114 @@
+{% extends "layout.html" %}
+{%set var ='<div class="navbar-end">
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          User
+        </a>
+        <div class="navbar-dropdown">
+          <a  href="/login">
+            Profile
+          </a>
+          <a  href="/logout">
+            Logout
+            </a>
+        </div>
+        </div>
+    </div>' %}
+{%block navbar%}{{var|safe}}{%endblock%}
+{% block title %}Clan Disquss{% endblock %}
+{% block content %}
+        
+
+   
+            <div style="width=%60">
+   
+    <div class="w3-container">
+        <br>
+        <br>
+        <br>
+		
+      <h3><b>{{result[3]}}</b><br><p>Send Date: {{result[2]}}</p></h3><br>
+      
+      {% if check(result[0]) %}
+          <a href={{url_for('deleteQuestion',qid=result[1])}}><button value="Answer" class="button">Delete This Question</button></a>
+          <a href={{url_for('editQuestion',qid=result[1])}}><button value="Answer" class="button">Edit This Question</button></a>
+      {% endif %}
+      
+     
+      
+    </div>
+
+    <div class="w3-container">
+        <div style="width:%100;">
+      <p align ="justify">{{result[4]}}</p>
+      </div>
+    </div>
+  </div>
+
+
+
+
+      <div class="comment">
+
+        {% for i in messages %}
+            <p>
+        	   <hr>
+            <img src={{url_for('static', filename='avatars/'+func(i[0]))}} alt="avatar"  class = "avatar"style="float:left;width:42px;height:42px;">
+            <b>{{funcid(i[0])}}</b>
+                <a href={{url_for('clanDiscuss',clan_id=clan_id,topic_id=result[1],reply=i[1])}}><button value="Answer" class="button">Answer</button></a>
+            
+                {% if check(i[0]) %}
+                    <a href={{url_for('editMessage',problem_id=result[1],message_id=i[1])}}><button value="em" class="button">Edit Message</button></a>
+                    <a href={{url_for('deleteMessage',pid=result[1],mid=i[1])}}><button value="em" class="button">Delete Message</button></a>
+               {%else%}
+                   <a href={{url_for('reportMessage',pid=result[1],mid=i[1],typ='c')}}><button value="em" class="button">Report Message</button></a>
+                {% endif %}
+            <br>
+            <i>{{i[2]}}</i>
+            <br>
+            
+            
+            </p>
+            {{i[3] | safe}}
+            {% if path(i[1]) !=None %}
+                <br>
+                <img src={{url_for('static', filename='avatars/'+path(i[1]))}} alt="image" style="float:left;width:8%;height:6%;">
+                <br>
+                <br>
+                <br>
+              
+            {% endif %}
+            <p id="demo"></p>
+        {% endfor %}
+        <hr>
+        <h6 style ="font size:"32;"" ><b>Leave a Reply</b></h6>
+        <br>
+        
+        {% if log() %}
+            <form action={{url_for('clanDiscuss',clan_id=clan_id,topic_id=result[1],reply=reply)}} method="POST"enctype="multipart/form-data">
+    				
+    				{{form.csrf_token}}
+    			
+    				
+    				{{form.message}}
+    				
+                    	<br>
+                    	{{form.spoiler}}
+                    	{{form.spoiler.label}}
+                    	<br>
+                    	{{form.upload.label}}
+                    	{{form.upload}}
+                    	<input type="submit" value="Send" class= "ab">
+                    	
+            </form>
+        {% else %}
+            <p>Please Login To Leave Reply</p>
+        {% endif %}
+		  
+  
+      </div>
+      
+
+  
+
+{%endblock%}    

@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+
+{% block title %}Create Clan{% endblock %}
+{%set var ='<div class="navbar-end">
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          User
+        </a>
+        <div class="navbar-dropdown">
+          <a  href="/login">
+            Profile
+          </a>
+          <a  href="/logout">
+            Logout
+            </a>
+        </div>
+        </div>
+    </div>' %}
+{%block navbar%}{{var|safe}}{%endblock%}
+{% block content %}
+<form action={{url_for('createClan')}} method="POST"enctype="multipart/form-data">
+				
+				{{form.csrf_token}}
+			
+				{{form.clanName.label}}
+				<br>
+				{{form.clanName}}
+				
+				<br>
+                    {% if error %}
+                    <p color="red">{{error}}</p>
+                    {% endif %}
+
+<input type="submit" value="Create Clan" >
+					</form> 
+
+
+{% endblock %}

@@ -1,0 +1,74 @@
+{% extends "layout.html" %}
+{%set var ='<div class="navbar-end">
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          User
+        </a>
+        <div class="navbar-dropdown">
+          <a  href="/login">
+            Profile
+          </a>
+          <a  href="/logout">
+            Logout
+            </a>
+        </div>
+        </div>
+    </div>' %}
+{%block navbar%}{{var|safe}}{%endblock%}
+{% block title %}clan Page{% endblock %}
+{% block content %}
+        
+	<div class="row">
+			  <div class="column left" ">
+				<br>
+				<br>
+				<br>
+				{% if line[6]==pack[0] %}
+                		<a href={{url_for('clanWriter',clan_id=pack[0])}} class="button is-link">Create Topic</a>
+                	{% else %}
+                    	<a href={{url_for('join',clan=pack[0],user=line[0])}} class="button is-link">Send Join Request</a>
+				{% endif %}
+				<h1><b>{{pack[3]}}</b></h1>
+				<hr>
+				<h3>Total Points: {{pack[2]}}</h3><br>
+				
+			  </div>
+			  {% if line[6]==pack[0]%}
+			  {% for i in la%}
+        			  
+        			  {% if i[10]|string()=="clan" %}
+            			  <div class="column right" style="background-color:#f2f2f2;">
+            			  <h2>A Disqussion Has Been Created</h2>
+            			  <a href={{url_for('clanDiscuss',clan_id=pack[0],topic_id=i[1],reply=0)}}>{{i[3]}}</a>
+            			  </div>
+        			  {% elif i[6]|string()=="clan" %}
+            			  <div class="column right" style="background-color:#f2f2f2;">
+            			  <h2>A Clan Message Has Been Written</h2>
+            			  <a href={{url_for('clanDiscuss',clan_id=pack[0],topic_id=i[5],reply=0)}}>Go to Disquss</a>
+            			  </div>
+        			  
+        			 {% else %}
+        			 gndfgdgndndfgfnfd
+        			 {% endif %}
+        			 
+        			 
+			  {% endfor %}
+			  {% endif %}
+			  {% if la %}
+        			  
+			  {%else%}
+        			  <div class="column right" style="background-color:#f2f2f2;">
+            			  <h2>No Activities.</h2>
+            			  
+            			  </div>
+			  {%endif%}
+			  {% if line[6]==pack[0] %}
+    			  <div class="column right" style="background-color:#f2f2f2;">
+        			  <a href={{url_for('seeClan',clan_id=pack[0])}}>See All Clan Events</a>
+        			  </div>
+			  {% endif %}
+			  
+			  
+			</div>
+
+{% endblock %}

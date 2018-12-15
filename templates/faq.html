@@ -1,5 +1,35 @@
 {% extends "layout.html" %}
-{% block title %}Editor{% endblock %}
+{% block title %}FAQ{% endblock %}
 {% block content %}
-<img src={{url_for('static', filename='uc.png')}} alt="under construction" width=100%;>
+
+
+        <button class="accordion">What is solveBet?</button>
+        <div >
+            <p>solveBet is a website where users ask questions each other and earn some points when correct answer entered first.<p>
+        </div>
+        
+        <button class="accordion">Should I login for looking problems?</button>
+        <div>
+            <p>Users can see questions even they are not logged in. Although to see profile of users ,join clan, leave reply and give bet user have to be logged in. <p>
+        </div>
+        
+        <button class="accordion">How to change user profile settings?</button>
+        <div >
+            <p>For changing user profile, user has to click 'pen' image in user profile.<p>
+        </div>
+        
+        <button class="accordion">What is clans?</button>
+        <div>
+            <p>Basically clans are  group of user.Head of clans answer question in behalf of clans and clan get point if answer is correct. User can disquss about problem in hidden clan
+            section.For creating clan, users have to have at least 1000 points.<p>
+        </div>
+        
+        <button class="accordion">How the betting system works?</button>
+        <div >
+            <p>Problems are created by users. After publishing problem, other user can solve and give the bet about problem. But to give bet user has
+            to be  in diffrent clans than asker of problem.If problems times up or problems has already been answered , betting system will not be work for taht question annymore and 
+            problem creator can not answer that question. <p>
+        </div>
+        
+        
 {%endblock%}

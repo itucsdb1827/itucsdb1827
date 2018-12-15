@@ -1,0 +1,69 @@
+{% extends "layout.html" %}
+{%set var ='<div class="navbar-end">
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          User
+        </a>
+        <div class="navbar-dropdown">
+          <a  href="/login">
+            Profile
+          </a>
+          <a  href="/logout">
+            Logout
+            </a>
+        </div>
+        </div>
+    </div>' %}
+{%block navbar%}{{var|safe}}{%endblock%}
+{% block title %}Edit Problem{% endblock %}
+{% block content %}
+		
+      <h3><b>EDIT YOUR QUESTION!</b> </h3>
+      <br>
+      {% if pack[10]|string() == 'general' %}
+<a href={{url_for('problems',var=pack[1],reply=0)}}><button value="Return" class="button">Return Problem</button></a>
+{% else %}
+<a href={{url_for('clanDiscuss',clan_id=func(),topic_id=pack[1],reply=0)}}><button value="Return" class="button">Return Topic</button></a>
+<p>Please fill answer time and topic even if you are creting clan post.</p>
+{% endif %}
+				
+				<form action={{url_for('editQuestion',qid=pack[1])}} method="POST"enctype="multipart/form-data">
+				
+				{{form.csrf_token}}
+			
+				{{form.title.label}}
+				{{ form.title(value=pack[3]) }}
+				<br>
+				
+				
+				<br>
+				{{form.topic.label}}
+				<br>
+			
+				{{ form.topic(value=pack[8]) }}
+				
+				<br>
+				{{form.time.label}}
+				<br>	
+				{{form.time}}	
+
+				
+				<br>
+				{{form.question.label}}
+				<br>
+				{% set f = form.question.process_data(pack[4]|string()) %}
+				{{ form.question() }}
+				<br>
+				{{form.answer.label}}
+				<br>
+				
+				{{ form.answer(value=pack[6]) }}
+				
+				<br>
+				<br>
+				
+        			<input type="submit" value="Publish" >
+					</form> 
+					
+				
+{%endblock%}   

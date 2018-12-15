@@ -1,0 +1,52 @@
+{% extends "layout.html" %}
+{%set var ='<div class="navbar-end">
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          User
+        </a>
+        <div class="navbar-dropdown">
+          <a  href="/login">
+            Profile
+          </a>
+          <a  href="/logout">
+            Logout
+            </a>
+        </div>
+        </div>
+    </div>' %}
+{%block navbar%}{{var|safe}}{%endblock%}
+{% block title %}See All{% endblock %}
+{% block content %}
+
+<div class="w3-card-4 w3-margin w3-white">
+            <div style="width=%60">
+                {% for i in la%}
+        			  
+            			  <div class="column right" style="background-color:#f2f2f2;">
+            			 {% if i[11] %}
+                			 <a href={{url_for('clanDiscuss',clan_id=i[11],topic_id=i[1],reply=0)}}>{{i[3]}}</a>
+            			 {% else%}
+            			  <a href={{url_for('problems',var=i[1],reply=0)}}>{{i[3]}}</a>
+            			  {% endif %}
+            			  </div>
+    			  {% endfor %}
+    			  {%if la%}
+    			  {% else %}
+        			  <div class="column right" style="background-color:#f2f2f2;">
+            			 
+            			 {% if key %}
+            			 <p>There are no problems about this topic.</p>
+            			  <a href="/">Return Main Page</a>
+            			 {% else %}
+            			 <p>There are no problems for clan.</p>
+            			  <a href="/">Return Main Page</a>
+            			 {% endif %}
+            			  
+            			  </div>
+    			  {% endif %}
+            </div>
+            </div>
+            <br><br><br>
+
+
+{% endblock %}
