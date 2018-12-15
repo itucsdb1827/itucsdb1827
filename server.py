@@ -13,8 +13,8 @@ import os
 import sys
 
 app = Flask(__name__)
-adress="postgres://postgres:159753456@localhost:5432/postgres"
-##adress="postgres://uyxegmizzcfgoj:3107cb2c0cfd9de6528ff9b966cd87d5040ec3dea13d85c863244efae597e6cb@ec2-54-225-241-25.compute-1.amazonaws.com:5432/d5uaci1fn1qp6d"
+##adress="postgres://postgres:159753456@localhost:5432/postgres"
+adress="postgres://uyxegmizzcfgoj:3107cb2c0cfd9de6528ff9b966cd87d5040ec3dea13d85c863244efae597e6cb@ec2-54-225-241-25.compute-1.amazonaws.com:5432/d5uaci1fn1qp6d"
 
 UPLOAD_FOLDER='static/avatars/'
 
