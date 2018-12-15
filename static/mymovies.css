@@ -1,3 +1,10 @@
+
+/* In CSS wise, I get some help from W3Schools and Bulma CSS Framework
+ * w3schools.com
+ * bulma.io*/
+
+
+
 footer {
     text-align: center;
     
@@ -103,12 +110,7 @@ body,h1,h2,h3,h4,h5,h6,h7 {font-family: "Raleway", sans-serif}
 .button:hover {
     background-color: white;
 }
-@media only screen and (max-width: 768px) {
-    /* For mobile phones: */
-    .comment{
-        width: 100%;
-    }
-}
+
 .avatar {
     vertical-align: middle;
     width: 50px;
@@ -146,7 +148,7 @@ body,h1,h2,h3,h4,h5,h6,h7 {font-family: "Raleway", sans-serif}
   text-align:left;
 }
 
-/* Clear floats after the columns */
+
 .row:after {
     content: "";
     display: table;
@@ -208,7 +210,6 @@ body,h1,h2,h3,h4,h5,h6,h7 {font-family: "Raleway", sans-serif}
     text-align: left;
     outline: none;
     font-size: 15px;
-    transition: 0.4s;
 }
 
 .active, .accordion:hover {
@@ -220,14 +221,8 @@ body,h1,h2,h3,h4,h5,h6,h7 {font-family: "Raleway", sans-serif}
     background-color: white;
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.2s ease-out;
+
 }
 
-@media only screen and (max-width: 768px) {
-    /* For mobile phones: */
-    .w3-card-4 w3-margin w3-white{
-        width: 100%;
-    }
-}
 
 
