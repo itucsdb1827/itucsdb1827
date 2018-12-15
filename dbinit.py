@@ -7,7 +7,6 @@ import psycopg2 as dbapi2
 INIT_STATEMENTS = [
     "CREATE TABLE IF NOT EXISTS DUMMY (NUM INTEGER)",
     "INSERT INTO DUMMY VALUES (42)",
-	"DROP TABLE clans CASCADE"
 ]
 
 
