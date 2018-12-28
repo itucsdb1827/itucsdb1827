@@ -19,15 +19,16 @@
 
 # -- Project information -----------------------------------------------------
 
-project = 'ITUCSDB18NN'
-copyright = '2018, ITUCSDB18NN'
-author = 'ITUCSDB18NN'
+project = 'ITUCSDB1827'
+copyright = '2018, ITUCSDB1827'
+author = 'ITUCSDB1827'
 
 # The short X.Y version
-version = ''
+version = '1.0'
 # The full version, including alpha/beta/rc tags
-release = ''
+release = '1.0'
 
+pdf_documents = [('index', u'rst2pdf', u'itucsdb1827 Documentation','ITUCSDB1827'),]
 
 # -- General configuration ---------------------------------------------------
 
@@ -102,7 +103,7 @@ html_static_path = ['_static']
 # -- Options for HTMLHelp output ---------------------------------------------
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'ITUCSDB18NNdoc'
+htmlhelp_basename = 'ITUCSDB1827doc'
 
 
 # -- Options for LaTeX output ------------------------------------------------
@@ -129,8 +130,8 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'ITUCSDB18NN.tex', 'ITUCSDB18NN Documentation',
-     'ITUCSDB18NN', 'manual'),
+    (master_doc, 'ITUCSDB1827.tex', 'ITUCSDB1827 Documentation',
+     'solveBet', 'manual'),
 ]
 
 
@@ -139,7 +140,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, 'itucsdb18nn', 'ITUCSDB18NN Documentation',
+    (master_doc, 'itucsdb1827', 'ITUCSDB1827 Documentation',
      [author], 1)
 ]
 
@@ -150,8 +151,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, 'ITUCSDB18NN', 'ITUCSDB18NN Documentation',
-     author, 'ITUCSDB18NN', 'One line description of project.',
+    (master_doc, 'ITUCSDB18', 'ITUCSDB1827 Documentation',
+     author, 'ITUCSDB1827', 'solveBet is asking problem project.',
      'Miscellaneous'),
 ]
 
@@ -175,3 +176,5 @@ epub_exclude_files = ['search.html']
 
 
 # -- Extension configuration -------------------------------------------------
+
+
