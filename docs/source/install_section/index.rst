@@ -1,5 +1,4 @@
-Installation Guide
-==================
+
 
 Installation Guide
 ==================

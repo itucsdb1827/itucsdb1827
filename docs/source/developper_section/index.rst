@@ -13,6 +13,74 @@ In this project,
 - Werkzeug is used for secure file uploads
 - Flask is used as Microframework for creation of website.
 
+Signup System
+-------------
+
+For signup mechanism, Flask-WTF is used. A simple usage of it given bellow. To get more detail, please investigate code.
+
+.. code-block:: python
+
+   ## class for a form
+   class LeaveReply(FlaskForm):
+   	message=TextAreaField('message',validators=[validators.InputRequired(),
+   	validators.Length(min=7)])
+  	spoiler=BooleanField('Might Include Answer')
+   	upload=upload = FileField('Picture', validators=[FileAllowed(['jpg', 'png'],
+   	'Images only!')])
+    	repliedMessageId=0 ##default message id for reply
+
+ 
+
+Login System
+------------
+
+For login mechanism, flask session is used. Basically, if password and username match with database, user is inserted in session and gets some user privilages. A simple usage of sessions is given bellow. To get more detail, please investigate code.
+
+.. code-block:: python
+
+   if 'user' in session:
+   	## user alreafy logged in
+
+Rendering Dynamic Pages
+-----------------------
+
+For rendering dynamic pages, jinja template engine is used.With jinja, html files rendered according result of queries.A sample jinja statement is given bellow. To get more detail, please investigate code.
+
+.. code-block:: html
+
+   <form action="{{url_for('signup')}}" method="POST"enctype="multipart/form-data">
+				
+   {{form.csrf_token}}
+			
+   {{form.username.label}}
+
+   {{form.username}}
+
+
+To navigate html files flask's render_template and redirect functions is used. Simple usage of them given bellow. To get more detail, please investigate code.
+
+.. code-block:: python
+
+   return render_template('home.html', form=form)
+   ## instance of class is sended to html.
+
+.. code-block:: python
+
+   return redirect(url_for('user',var=line[0]))
+   ## a variable is sended to html.
+
+Database Connection
+-------------------
+
+As a database, PostgreSQl is used. Table of project and operations  will be explained in another heading but a simple connecton method is given bellow. To get more detail, please investigate code.
+
+.. code-block:: python
+
+   with psycopg2.connect(adress) as conn:
+        cursor=conn.cursor()
+        statement="""SELECT *FROM users WHERE id=%s"""
+        cursor.execute(statement,(id,))
+
 users Table
 -----------
 
@@ -168,7 +236,7 @@ In this table, attributes of messages stored. Attributes of messages and explana
 - integer clan_id: If it is a clan message clan id will be stored, otherwise it is NULL. It is foreign key to clans table.
 - boolean containanswer: If user mark 'Might include Answer' it will become true, otherwise it is false.
 - varchar imagepath: User can add image to message.If user adds a image to the message, file location will be stored in this attribute.
-- integer reportnum: By clicking 'Report User' button in right side of message, this will be increased by 1. If this attribute reachs more than o equal 5, admin of topic can  delete this message.
+- integer reportnum: By clicking 'Report User' button in right side of message, this will be increased by 1. If this attribute reachs more than or equal 5, admin of topic can  delete this message.
 
 In 'server.py' line 829 create operation on messages table is performed.
 

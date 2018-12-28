@@ -1,6 +1,5 @@
-.. ITUCSDB1827 documentation master file, created as a template.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
+Welcome to itucsdb35's documentation!
+=====================================
 
 :Team: solveBet
 
