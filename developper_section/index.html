@@ -1,0 +1,503 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Developper Guide &mdash; ITUCSDB1827 1.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="User Guide" href="../user_section/index.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> ITUCSDB1827
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../install_section/index.html">Installation Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user_section/index.html">User Guide</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Developper Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#used-python-packages">Used Python Packages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#signup-system">Signup System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#login-system">Login System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#rendering-dynamic-pages">Rendering Dynamic Pages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#database-connection">Database Connection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#users-table">users Table</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#problems-table">problems table</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#messages-table">messages Table</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#clans-table">clans Table</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#bets-table">bets Table</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#request-table">request Table</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">ITUCSDB1827</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>Developper Guide</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/developper_section/index.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="developper-guide">
+<h1>Developper Guide<a class="headerlink" href="#developper-guide" title="Permalink to this headline">¶</a></h1>
+<p>In this developper guide, technical details of solveBet will be explained. To see live demo please go to ‘’<a class="reference external" href="https://itucsdb1827.herokuapp.com/">https://itucsdb1827.herokuapp.com/</a>’‘</p>
+<div class="section" id="used-python-packages">
+<h2>Used Python Packages<a class="headerlink" href="#used-python-packages" title="Permalink to this headline">¶</a></h2>
+<p>In this project,</p>
+<ul class="simple">
+<li>Flask-WTF is used for form validation</li>
+<li>passlib is used for password encyrption</li>
+<li>Werkzeug is used for secure file uploads</li>
+<li>Flask is used as Microframework for creation of website.</li>
+</ul>
+</div>
+<div class="section" id="signup-system">
+<h2>Signup System<a class="headerlink" href="#signup-system" title="Permalink to this headline">¶</a></h2>
+<p>For signup mechanism, Flask-WTF is used. A simple usage of it given bellow. To get more detail, please investigate code.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">## class for a form</span>
+<span class="k">class</span> <span class="nc">LeaveReply</span><span class="p">(</span><span class="n">FlaskForm</span><span class="p">):</span>
+     <span class="n">message</span><span class="o">=</span><span class="n">TextAreaField</span><span class="p">(</span><span class="s1">&#39;message&#39;</span><span class="p">,</span><span class="n">validators</span><span class="o">=</span><span class="p">[</span><span class="n">validators</span><span class="o">.</span><span class="n">InputRequired</span><span class="p">(),</span>
+     <span class="n">validators</span><span class="o">.</span><span class="n">Length</span><span class="p">(</span><span class="nb">min</span><span class="o">=</span><span class="mi">7</span><span class="p">)])</span>
+     <span class="n">spoiler</span><span class="o">=</span><span class="n">BooleanField</span><span class="p">(</span><span class="s1">&#39;Might Include Answer&#39;</span><span class="p">)</span>
+     <span class="n">upload</span><span class="o">=</span><span class="n">upload</span> <span class="o">=</span> <span class="n">FileField</span><span class="p">(</span><span class="s1">&#39;Picture&#39;</span><span class="p">,</span> <span class="n">validators</span><span class="o">=</span><span class="p">[</span><span class="n">FileAllowed</span><span class="p">([</span><span class="s1">&#39;jpg&#39;</span><span class="p">,</span> <span class="s1">&#39;png&#39;</span><span class="p">],</span>
+     <span class="s1">&#39;Images only!&#39;</span><span class="p">)])</span>
+     <span class="n">repliedMessageId</span><span class="o">=</span><span class="mi">0</span> <span class="c1">##default message id for reply</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="login-system">
+<h2>Login System<a class="headerlink" href="#login-system" title="Permalink to this headline">¶</a></h2>
+<p>For login mechanism, flask session is used. Basically, if password and username match with database, user is inserted in session and gets some user privilages. A simple usage of sessions is given bellow. To get more detail, please investigate code.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="s1">&#39;user&#39;</span> <span class="ow">in</span> <span class="n">session</span><span class="p">:</span>
+     <span class="c1">## user alreafy logged in</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="rendering-dynamic-pages">
+<h2>Rendering Dynamic Pages<a class="headerlink" href="#rendering-dynamic-pages" title="Permalink to this headline">¶</a></h2>
+<p>For rendering dynamic pages, jinja template engine is used.With jinja, html files rendered according result of queries.A sample jinja statement is given bellow. To get more detail, please investigate code.</p>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">form</span> <span class="na">action</span><span class="o">=</span><span class="s">&quot;{{url_for(&#39;signup&#39;)}}&quot;</span> <span class="na">method</span><span class="o">=</span><span class="s">&quot;POST&quot;</span><span class="na">enctype</span><span class="o">=</span><span class="s">&quot;multipart/form-data&quot;</span><span class="p">&gt;</span>
+
+{{form.csrf_token}}
+
+{{form.username.label}}
+
+{{form.username}}
+</pre></div>
+</div>
+<p>To navigate html files flask’s render_template and redirect functions is used. Simple usage of them given bellow. To get more detail, please investigate code.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;home.html&#39;</span><span class="p">,</span> <span class="n">form</span><span class="o">=</span><span class="n">form</span><span class="p">)</span>
+<span class="c1">## instance of class is sended to html.</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s1">&#39;user&#39;</span><span class="p">,</span><span class="n">var</span><span class="o">=</span><span class="n">line</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+<span class="c1">## a variable is sended to html.</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="database-connection">
+<h2>Database Connection<a class="headerlink" href="#database-connection" title="Permalink to this headline">¶</a></h2>
+<p>As a database, PostgreSQl is used. Table of project and operations  will be explained in another heading but a simple connecton method is given bellow. To get more detail, please investigate code.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">psycopg2</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">adress</span><span class="p">)</span> <span class="k">as</span> <span class="n">conn</span><span class="p">:</span>
+     <span class="n">cursor</span><span class="o">=</span><span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+     <span class="n">statement</span><span class="o">=</span><span class="s2">&quot;&quot;&quot;SELECT *FROM users WHERE id=</span><span class="si">%s</span><span class="s2">&quot;&quot;&quot;</span>
+     <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">statement</span><span class="p">,(</span><span class="nb">id</span><span class="p">,))</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="users-table">
+<h2>users Table<a class="headerlink" href="#users-table" title="Permalink to this headline">¶</a></h2>
+<p>In this table, attributes of users stored. Attributes of users and explanation is given bellow.</p>
+<div class="figure" id="id1">
+<a class="reference internal image-reference" href="../_images/usersTable.png"><img alt="users table" src="../_images/usersTable.png" style="width: 129.0px; height: 253.5px;" /></a>
+<p class="caption"><span class="caption-text">Overview of users table</span></p>
+</div>
+<ul class="simple">
+<li>integer id: primary key of users table.</li>
+<li>varchar username: nickname of user. It has to be unique.</li>
+<li>varchar pass_word: encyrpted password of user.For encyription passlib library is used</li>
+<li>varchar avatarpath: file location of users avatar.</li>
+<li>varchar email: email of user. It has to be unique.</li>
+<li>integer points : total points of user.</li>
+<li>integer clannumber: clan id of user. If user is not a member a clan it is NULL. It is a foreign key to clans table.</li>
+<li>timestamp dateofjoin: date of join of user. UTC timestamp according Greenwich.</li>
+<li>varchar adminof: user can be admin.There are 6 different value for this: phy(physics) ,m(math), ds(Data Structure), algo(Algorithm), general and NULL.</li>
+<li>boolean isactive: user logged in or not.</li>
+<li>boolean headofclan: user headofclan or not.</li>
+</ul>
+<p>In ‘server.py’ line 603 create operation on users table is performed.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">statement</span><span class="o">=</span><span class="s2">&quot;&quot;&quot;INSERT INTO users(username,pass_word,avatarpath,email,isActive)</span>
+<span class="s2">VALUES(</span><span class="si">%s</span><span class="s2">,</span><span class="si">%s</span><span class="s2">,</span><span class="si">%s</span><span class="s2">,</span><span class="si">%s</span><span class="s2">,TRUE)&quot;&quot;&quot;</span>
+<span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">statement</span><span class="p">,(</span><span class="nb">str</span><span class="p">(</span><span class="n">form</span><span class="o">.</span><span class="n">username</span><span class="o">.</span><span class="n">data</span><span class="p">),</span><span class="nb">str</span><span class="p">(</span><span class="n">crypt</span><span class="p">),</span><span class="nb">str</span><span class="p">(</span><span class="n">filename</span><span class="p">),</span>
+<span class="nb">str</span><span class="p">(</span><span class="n">form</span><span class="o">.</span><span class="n">email1</span><span class="o">.</span><span class="n">data</span><span class="p">)))</span>
+</pre></div>
+</div>
+<p>In ‘server.py’ line 128 delete operation on users table is performed.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">psycopg2</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">adress</span><span class="p">)</span> <span class="k">as</span> <span class="n">conn</span><span class="p">:</span>
+     <span class="n">cursor</span><span class="o">=</span><span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+     <span class="n">statement</span><span class="o">=</span><span class="s2">&quot;&quot;&quot;DELETE FROM users WHERE username=</span><span class="si">%s</span><span class="s2">&quot;&quot;&quot;</span>
+     <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">statement</span><span class="p">,(</span><span class="n">username</span><span class="p">,))</span>
+</pre></div>
+</div>
+<p>In ‘server.py’ line 1310 update operation on users table is performed.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">statement</span><span class="o">=</span><span class="s2">&quot;&quot;&quot;UPDATE users SET pass_word=</span><span class="si">%s</span><span class="s2"> WHERE id=</span><span class="si">%s</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="n">crypt</span><span class="o">=</span><span class="n">hasher</span><span class="o">.</span><span class="n">hash</span><span class="p">(</span><span class="n">formP</span><span class="o">.</span><span class="n">password2</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+<span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">statement</span><span class="p">,(</span><span class="n">crypt</span><span class="p">,</span><span class="n">var</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>In ‘server.py’ line 68 read operation on users table is performed.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">psycopg2</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">adress</span><span class="p">)</span> <span class="k">as</span> <span class="n">conn</span><span class="p">:</span>
+     <span class="n">cursor</span><span class="o">=</span><span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+     <span class="n">statement</span><span class="o">=</span><span class="s2">&quot;&quot;&quot;SELECT *FROM users WHERE id=</span><span class="si">%s</span><span class="s2">&quot;&quot;&quot;</span>
+     <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">statement</span><span class="p">,(</span><span class="nb">id</span><span class="p">,))</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">There is multiple read and update operation which is performed in different locations.</p>
+</div>
+</div>
+<div class="section" id="problems-table">
+<h2>problems table<a class="headerlink" href="#problems-table" title="Permalink to this headline">¶</a></h2>
+<p>In this table, attributes of problems stored. Attributes of problems and explanation is given bellow.</p>
+<div class="figure" id="id2">
+<a class="reference internal image-reference" href="../_images/problemsTable.png"><img alt="problems table" src="../_images/problemsTable.png" style="width: 137.25px; height: 227.25px;" /></a>
+<p class="caption"><span class="caption-text">Overview of problems table</span></p>
+</div>
+<ul class="simple">
+<li>integer id: Primary key of problems table.</li>
+<li>integer user_id: Asker of question. It is a foreign key to users table.</li>
+<li>timestamp senddate: Date of problems creation. UTC timestamp according Greenwich.</li>
+<li>varchar title: Title of question.</li>
+<li>varchar question: Content of question.</li>
+<li>int totalcollectedpoints: Total amount of all bets for this question.</li>
+<li>double answer: Answer of question.</li>
+<li>boolean isanswered: Question answered or not.</li>
+<li>varchar topic: There are 4 different options: phy(physics) ,m(math), ds(Data Structure), algo(Algorithm).</li>
+<li>varchar giventime: Given amount of time to user to answer question.</li>
+<li>varchar typeof: It is for problems or clan disqussion.(see user guide for more explanation)</li>
+<li>integer clan_id: If it is for clan disqussion, clan id will be appeared. Otherwise it is NULL. It is foreign key to clans table.</li>
+</ul>
+<p>In ‘server.py’ line 930 create operation on problems table is performed.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">psycopg2</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">adress</span><span class="p">)</span> <span class="k">as</span> <span class="n">conn</span><span class="p">:</span>
+     <span class="n">cursor</span><span class="o">=</span><span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+     <span class="n">statement</span><span class="o">=</span><span class="s2">&quot;&quot;&quot;INSERT INTO problems(user_id,title,question,totalcollectedpoints,</span>
+<span class="s2">     answer,topic,giventime,typeof) VALUES (</span><span class="si">%s</span><span class="s2">,</span><span class="si">%s</span><span class="s2">,</span><span class="si">%s</span><span class="s2">,</span><span class="si">%s</span><span class="s2">,</span><span class="si">%s</span><span class="s2">,</span><span class="si">%s</span><span class="s2">,</span><span class="si">%s</span><span class="s2">,</span><span class="si">%s</span><span class="s2">)&quot;&quot;&quot;</span>
+     <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">statement</span><span class="p">,(</span><span class="n">UserNameToId</span><span class="p">(</span><span class="n">session</span><span class="p">[</span><span class="s1">&#39;user&#39;</span><span class="p">]),</span><span class="nb">str</span><span class="p">(</span><span class="n">form</span><span class="o">.</span><span class="n">title</span><span class="o">.</span><span class="n">data</span><span class="p">),</span>
+     <span class="nb">str</span><span class="p">(</span><span class="n">form</span><span class="o">.</span><span class="n">question</span><span class="o">.</span><span class="n">data</span><span class="p">),</span>
+     <span class="mi">0</span><span class="p">,</span><span class="nb">str</span><span class="p">(</span><span class="n">form</span><span class="o">.</span><span class="n">answer</span><span class="o">.</span><span class="n">data</span><span class="p">),</span><span class="nb">str</span><span class="p">(</span><span class="n">form</span><span class="o">.</span><span class="n">topic</span><span class="o">.</span><span class="n">data</span><span class="p">),</span><span class="nb">str</span><span class="p">(</span><span class="n">form</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">data</span><span class="p">),</span><span class="s1">&#39;general&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>In ‘server.py’ line 471 delete operation on problems table is performed.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">psycopg2</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">adress</span><span class="p">)</span> <span class="k">as</span> <span class="n">conn</span><span class="p">:</span>
+     <span class="n">cursor</span><span class="o">=</span><span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+     <span class="n">statement</span><span class="o">=</span><span class="s2">&quot;&quot;&quot;DELETE FROM problems WHERE id=</span><span class="si">%s</span><span class="s2">&quot;&quot;&quot;</span>
+     <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">statement</span><span class="p">,(</span><span class="n">qid</span><span class="p">,))</span>
+</pre></div>
+</div>
+<p>In ‘server.py’ line 564 update operation on problems table is performed.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">psycopg2</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">adress</span><span class="p">)</span> <span class="k">as</span> <span class="n">conn</span><span class="p">:</span>
+     <span class="n">cursor</span><span class="o">=</span><span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+     <span class="n">statement</span><span class="o">=</span><span class="s2">&quot;&quot;&quot;UPDATE problems SET title=</span><span class="si">%s</span><span class="s2">,topic=</span><span class="si">%s</span><span class="s2">,giventime=</span><span class="si">%s</span><span class="s2">,</span>
+<span class="s2">     question=</span><span class="si">%s</span><span class="s2">,answer=</span><span class="si">%s</span><span class="s2"> WHERE id=</span><span class="si">%s</span><span class="s2">&quot;&quot;&quot;</span> <span class="c1">## pre populate some field</span>
+     <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">statement</span><span class="p">,(</span><span class="nb">str</span><span class="p">(</span><span class="n">form</span><span class="o">.</span><span class="n">title</span><span class="o">.</span><span class="n">data</span><span class="p">),</span><span class="nb">str</span><span class="p">(</span><span class="n">form</span><span class="o">.</span><span class="n">topic</span><span class="o">.</span><span class="n">data</span><span class="p">),</span>
+     <span class="nb">str</span><span class="p">(</span><span class="n">form</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">data</span><span class="p">),</span><span class="nb">str</span><span class="p">(</span><span class="n">form</span><span class="o">.</span><span class="n">question</span><span class="o">.</span><span class="n">data</span><span class="p">),</span><span class="n">form</span><span class="o">.</span><span class="n">answer</span><span class="o">.</span><span class="n">data</span><span class="p">,</span><span class="n">qid</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>In ‘server.py’ line 109 read operation on problems table is performed.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">psycopg2</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">adress</span><span class="p">)</span> <span class="k">as</span> <span class="n">conn</span><span class="p">:</span>
+     <span class="n">cursor</span><span class="o">=</span><span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+     <span class="n">statement</span><span class="o">=</span><span class="s2">&quot;&quot;&quot;SELECT *FROM problems WHERE id=</span><span class="si">%s</span><span class="s2">&quot;&quot;&quot;</span>
+     <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">statement</span><span class="p">,(</span><span class="n">pid</span><span class="p">,))</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">There is multiple read and update operation which is performed in different locations.</p>
+</div>
+</div>
+<div class="section" id="messages-table">
+<h2>messages Table<a class="headerlink" href="#messages-table" title="Permalink to this headline">¶</a></h2>
+<p>In this table, attributes of messages stored. Attributes of messages and explanation is given bellow.</p>
+<div class="figure" id="id3">
+<a class="reference internal image-reference" href="../_images/messageTable.png"><img alt="messages table" src="../_images/messageTable.png" style="width: 128.25px; height: 219.0px;" /></a>
+<p class="caption"><span class="caption-text">Overview of messages table</span></p>
+</div>
+<ul class="simple">
+<li>integer message_id: Primary key of messages table.</li>
+<li>integer user_id: Creator of message. It is a foreign key to users table.</li>
+<li>timestamp sendtime: Send time of message. UTC timestamp according Greenwich.</li>
+<li>varchar message: Content of message.</li>
+<li>integer replyof: If message is reply of another message,replied message’s id will be strored, otherwise it will be NULL. It is foreign key to messages table.</li>
+<li>integer problem_id: Id of problem that messsage belongs. It is foreign key to problems table.</li>
+<li>varchar typeofmessage: Clan message or problem message.</li>
+<li>integer clan_id: If it is a clan message clan id will be stored, otherwise it is NULL. It is foreign key to clans table.</li>
+<li>boolean containanswer: If user mark ‘Might include Answer’ it will become true, otherwise it is false.</li>
+<li>varchar imagepath: User can add image to message.If user adds a image to the message, file location will be stored in this attribute.</li>
+<li>integer reportnum: By clicking ‘Report User’ button in right side of message, this will be increased by 1. If this attribute reachs more than or equal 5, admin of topic can  delete this message.</li>
+</ul>
+<p>In ‘server.py’ line 829 create operation on messages table is performed.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">psycopg2</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">adress</span><span class="p">)</span> <span class="k">as</span> <span class="n">conn2</span><span class="p">:</span>
+     <span class="k">if</span> <span class="n">f</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span> <span class="c1">## if reply of something</span>
+             <span class="n">cursor2</span><span class="o">=</span><span class="n">conn2</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+             <span class="n">statement2</span><span class="o">=</span><span class="s2">&quot;&quot;&quot;INSERT INTO messages(user_id,message,replyof,problem_id,</span>
+<span class="s2">             typeofmessage,containanswer,imagepath) VALUES(</span><span class="si">%s</span><span class="s2">,</span><span class="si">%s</span><span class="s2">,</span><span class="si">%s</span><span class="s2">,</span><span class="si">%s</span><span class="s2">,</span><span class="si">%s</span><span class="s2">,</span><span class="si">%s</span><span class="s2">,</span><span class="si">%s</span><span class="s2">)&quot;&quot;&quot;</span>
+             <span class="n">cursor2</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">statement2</span><span class="p">,(</span><span class="n">UserNameToId</span><span class="p">(</span><span class="n">session</span><span class="p">[</span><span class="s1">&#39;user&#39;</span><span class="p">]),</span><span class="n">x</span><span class="p">,</span>
+             <span class="n">form</span><span class="o">.</span><span class="n">repliedMessageId</span><span class="p">,</span><span class="n">line</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="s2">&quot;general&quot;</span><span class="p">,</span><span class="n">form</span><span class="o">.</span><span class="n">spoiler</span><span class="o">.</span><span class="n">data</span><span class="p">,</span><span class="nb">str</span><span class="p">(</span><span class="n">filename</span><span class="p">)))</span>
+</pre></div>
+</div>
+<p>In ‘server.py’ line 497 delete operation on messages table is performed.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">psycopg2</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">adress</span><span class="p">)</span> <span class="k">as</span> <span class="n">conn</span><span class="p">:</span>
+     <span class="n">cursor</span><span class="o">=</span><span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+     <span class="n">statement</span><span class="o">=</span><span class="s2">&quot;&quot;&quot;DELETE FROM messages WHERE message_id=</span><span class="si">%s</span><span class="s2">&quot;&quot;&quot;</span>
+     <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">statement</span><span class="p">,(</span><span class="n">mid</span><span class="p">,)))</span>
+</pre></div>
+</div>
+<p>In ‘server.py’ line 534 update operation on messages table is performed.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">psycopg2</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">adress</span><span class="p">)</span> <span class="k">as</span> <span class="n">conn</span><span class="p">:</span>
+     <span class="n">cursor</span><span class="o">=</span><span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+     <span class="n">statement</span><span class="o">=</span><span class="s2">&quot;&quot;&quot;UPDATE messages SET reportnum=reportnum+1 WHERE</span>
+<span class="s2">     message_id=</span><span class="si">%s</span><span class="s2"> and problem_id=</span><span class="si">%s</span><span class="s2">&quot;&quot;&quot;</span>
+     <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">statement</span><span class="p">,(</span><span class="n">mid</span><span class="p">,</span><span class="n">pid</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>In ‘server.py’ line 1170 read operation on messages table is performed.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">psycopg2</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">adress</span><span class="p">)</span> <span class="k">as</span> <span class="n">conn</span><span class="p">:</span>
+     <span class="n">cursor</span><span class="o">=</span><span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+     <span class="n">statement</span><span class="o">=</span><span class="s2">&quot;&quot;&quot;SELECT *FROM messages WHERE reportnum&gt;=5 and typeofmessage=</span><span class="si">%s</span><span class="s2">&quot;&quot;&quot;</span>
+     <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">statement</span><span class="p">,(</span><span class="s2">&quot;clan&quot;</span><span class="p">,))</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">There is multiple read and update operation which is performed in different locations.</p>
+</div>
+</div>
+<div class="section" id="clans-table">
+<h2>clans Table<a class="headerlink" href="#clans-table" title="Permalink to this headline">¶</a></h2>
+<p>In this table, attributes of clans stored. Attributes of clans and explanation is given bellow.</p>
+<div class="figure" id="id4">
+<a class="reference internal image-reference" href="../_images/clanTable.png"><img alt="clans table" src="../_images/clanTable.png" style="width: 96.0px; height: 115.5px;" /></a>
+<p class="caption"><span class="caption-text">Overview of clans table</span></p>
+</div>
+<ul class="simple">
+<li>integer id: Primary key of clans table.</li>
+<li>varchar headofclan: User id of head of clan. It is a foreign key to users table.</li>
+<li>integer points: It will store clan points.</li>
+<li>varchar clanname: Name of clan.</li>
+</ul>
+</div>
+<div class="section" id="bets-table">
+<h2>bets Table<a class="headerlink" href="#bets-table" title="Permalink to this headline">¶</a></h2>
+<p>In this table, records of given answers to problems is stored. Attributes of clans and explanation is given bellow.</p>
+<div class="figure" id="id5">
+<a class="reference internal image-reference" href="../_images/betsTable.png"><img alt="bets table" src="../_images/betsTable.png" style="width: 100.5px; height: 156.0px;" /></a>
+<p class="caption"><span class="caption-text">Overview of bets table</span></p>
+</div>
+<ul class="simple">
+<li>integer id: Primary key of bets table.</li>
+<li>integer user_id: Giver of bet. It is a foreign key to users table.</li>
+<li>integer amount: Given amount of bet.</li>
+<li>varchar typeof: clan or personal bet.</li>
+<li>integer answer: answer of question according to the that user.</li>
+<li>integer clan_id: If it’s type clan, id of that clan will be stored. It is a foreign key to clans table.</li>
+<li>integer question_id: Id of problem which bet is given. It is a foreign key to question table.</li>
+</ul>
+</div>
+<div class="section" id="request-table">
+<h2>request Table<a class="headerlink" href="#request-table" title="Permalink to this headline">¶</a></h2>
+<p>In this table, clan join requests is stored. Attributes of clans and explanation is given bellow.</p>
+<div class="figure" id="id6">
+<a class="reference internal image-reference" href="../_images/requestTable.png"><img alt="request table" src="../_images/requestTable.png" style="width: 65.25px; height: 76.5px;" /></a>
+<p class="caption"><span class="caption-text">Overview of request table</span></p>
+</div>
+<ul class="simple">
+<li>integer id: Primary key of request table.</li>
+<li>integer user_id: Id of user who wants to join clan. It is a foreign key to users table.</li>
+<li>integer clan_id: Id of clan which user wants to join. It is a foreign key to clan table.</li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="../user_section/index.html" class="btn btn-neutral" title="User Guide" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, ITUCSDB1827
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
